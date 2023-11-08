@@ -28,7 +28,7 @@ public:
   MPMCQueue operator=(const MPMCQueue& q) = delete;
 
   ~MPMCQueue() {
-    for (auto i = 0; i < capacity_; ++i) {
+    for (uint64_t i = 0; i < capacity_; ++i) {
       delete data_buff_[i];
     }
   }

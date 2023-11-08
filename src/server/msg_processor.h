@@ -6,6 +6,7 @@
 #include <atomic>
 #include <string>
 #include <glog/logging.h>
+#include <chrono>
 
 #include "msg_queue/mpmc_queue.h"
 
@@ -15,12 +16,12 @@ public:
   ~MsgProcessor();
   void InitThreads();
   void ProcessorMain();
-  void SetStop();
+  void Stop();
 private:
   std::vector<std::thread> processor_vec_;
   MPMCQueue<std::string>* msg_queue_;
-  int thread_num_;
-  std::atomic<bool> stop_;  
+  int processor_num_;
+  std::atomic<bool> stop_{false};
 };
 
 #endif
