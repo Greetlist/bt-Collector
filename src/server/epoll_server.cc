@@ -15,7 +15,7 @@ void EpollServer::Init() {
   }
   InitRecvSocket();
   InitSendSocket();
-  msg_processor_ = new MsgProcessor(msg_queue_, server_config_["msg_processor_num"].as<int>());
+  msg_processor_ = new MsgProcessor(msg_queue_, server_config_);
   msg_processor_->InitThreads();
 }
 

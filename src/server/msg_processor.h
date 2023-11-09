@@ -9,10 +9,11 @@
 #include <chrono>
 
 #include "msg_queue/mpmc_queue.h"
+#include "dht/dht.h"
 
 class MsgProcessor {
 public:
-  explicit MsgProcessor(MPMCQueue<std::string>*, int);
+  explicit MsgProcessor(MPMCQueue<std::string>*, YAML::Node);
   ~MsgProcessor();
   void InitThreads();
   void ProcessorMain();
@@ -20,8 +21,9 @@ public:
 private:
   std::vector<std::thread> processor_vec_;
   MPMCQueue<std::string>* msg_queue_;
-  int processor_num_;
   std::atomic<bool> stop_{false};
+  YAML::Node server_config_;
+  DHT* dht_;
 };
 
 #endif
